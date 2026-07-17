@@ -1,0 +1,36 @@
+<!doctype html>
+<!-- Dev tool: tile-coordinate picker. /picker.html?img=/assets/tiles/x.png&x=0&y=0&w=24&h=16 -->
+<html><head><meta charset="UTF-8"><style>
+  body { margin: 0; background: #111; }
+  canvas { image-rendering: pixelated; }
+</style></head>
+<body>
+<canvas id="c"></canvas>
+<script>
+  const q = new URLSearchParams(location.search);
+  const TS = 48;
+  const ox = parseInt(q.get('x') || '0'), oy = parseInt(q.get('y') || '0');
+  const vw = parseInt(q.get('w') || '24'), vh = parseInt(q.get('h') || '16');
+  const img = new Image();
+  img.onload = () => {
+    const c = document.getElementById('c');
+    c.width = vw * TS + 40; c.height = vh * TS + 24;
+    const x = c.getContext('2d');
+    x.imageSmoothingEnabled = false;
+    x.fillStyle = '#333'; x.fillRect(0, 0, c.width, c.height);
+    x.drawImage(img, ox * TS, oy * TS, vw * TS, vh * TS, 40, 24, vw * TS, vh * TS);
+    x.strokeStyle = 'rgba(255,0,128,0.6)';
+    x.fillStyle = '#0f0';
+    x.font = '11px monospace';
+    for (let i = 0; i <= vw; i++) {
+      x.beginPath(); x.moveTo(40 + i * TS, 24); x.lineTo(40 + i * TS, c.height); x.stroke();
+      if (i < vw) x.fillText(String(ox + i), 42 + i * TS, 16);
+    }
+    for (let j = 0; j <= vh; j++) {
+      x.beginPath(); x.moveTo(40, 24 + j * TS); x.lineTo(c.width, 24 + j * TS); x.stroke();
+      if (j < vh) x.fillText(String(oy + j), 2, 40 + j * TS);
+    }
+  };
+  img.src = q.get('img') || '/assets/tiles/room_builder.png';
+</script>
+</body></html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html><head><meta charset="UTF-8"><style>
+  body { margin: 0; background: #222; color: #0f0; font: 11px monospace; }
+  .row { display: flex; flex-wrap: wrap; }
+  .cell { display: inline-block; margin: 4px; text-align: center; }
+  canvas { image-rendering: pixelated; background: #3a3a3a; display: block; margin: 0 auto 2px; }
+  h3 { color: #ffd6a0; margin: 8px 4px 2px; }
+</style></head>
+<body>
+<h3>HAIRSTYLES (color 01)</h3><div class="row" id="hair"></div>
+<h3>OUTFITS</h3><div class="row" id="out"></div>
+<script>
+  const G = '/assets/characters/gen/';
+  const load = (src) => new Promise((res) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src; });
+  const SX = 18 * 48; // down-facing idle frame column
+  function comp(imgs) {
+    const c = document.createElement('canvas'); c.width = 48; c.height = 96;
+    c.style.width = '72px'; c.style.height = '144px';
+    const x = c.getContext('2d');
+    for (const im of imgs) if (im) x.drawImage(im, SX, 96, 48, 96, 0, 0, 48, 96);
+    return c;
+  }
+  (async () => {
+    const body = await load(G + 'Body_48x48_03.png');
+    const eyes = await load(G + 'Eyes_48x48_01.png');
+    const hairDiv = document.getElementById('hair');
+    for (let s = 1; s <= 12; s++) {
+      const id = String(s).padStart(2, '0');
+      const h = await load(G + `Hairstyle_${id}_48x48_01.png`);
+      if (!h) continue;
+      const cell = document.createElement('div'); cell.className = 'cell';
+      cell.appendChild(comp([body, eyes, h])); cell.append('H' + id);
+      hairDiv.appendChild(cell);
+    }
+    const hair1 = await load(G + 'Hairstyle_01_48x48_01.png');
+    const outDiv = document.getElementById('out');
+    for (let o = 1; o <= 20; o++) {
+      const id = String(o).padStart(2, '0');
+      const out = await load(G + `Outfit_${id}_48x48_01.png`);
+      if (!out) continue;
+      const cell = document.createElement('div'); cell.className = 'cell';
+      cell.appendChild(comp([body, eyes, out, hair1])); cell.append('O' + id);
+      outDiv.appendChild(cell);
+    }
+  })();
+</script>
+</body></html>

@@ -1,0 +1,272 @@
+{
+ ".": [
+  "hf_floor.png",
+  0,
+  0
+ ],
+ ",": [
+  "hf_floordark.png",
+  0,
+  0
+ ],
+ "#": [
+  "hf_wall.png",
+  0,
+  0
+ ],
+ "W": [
+  "hf_window.png",
+  0,
+  0
+ ],
+ "c": [
+  "hf_carpet.png",
+  0,
+  0
+ ],
+ "P": [
+  "hf_plant.png",
+  0,
+  0
+ ],
+ "d": [
+  "hf_door.png",
+  0,
+  0
+ ],
+ "G": [
+  "hf_grass.png",
+  0,
+  0
+ ],
+ "H": [
+  "hf_tallgrass.png",
+  0,
+  0
+ ],
+ "R": [
+  "hf_path.png",
+  0,
+  0
+ ],
+ "~": [
+  "hf_water.png",
+  0,
+  0
+ ],
+ "^": [
+  "hf_tree.png",
+  0,
+  0
+ ],
+ "M": [
+  "hf_rock.png",
+  0,
+  0
+ ],
+ "T": [
+  "hf_stagefront.png",
+  0,
+  0
+ ],
+ "X": [
+  "tvstudio.png",
+  12,
+  3
+ ],
+ "B": [
+  "music.png",
+  0,
+  39
+ ],
+ "$": [
+  "hf_sign_shop.png",
+  0,
+  0
+ ],
+ "+": [
+  "hf_sign_hospital.png",
+  0,
+  0
+ ],
+ "s": [
+  "hf_sand.png",
+  0,
+  0
+ ],
+ "w": [
+  "hf_wax.png",
+  0,
+  0
+ ],
+ "v": [
+  "hf_vinylpile.png",
+  0,
+  0
+ ],
+ "x": [
+  "hf_deadtree.png",
+  0,
+  0
+ ],
+ "S": [
+  "hf_seat.png",
+  0,
+  0
+ ],
+ "*": [
+  "hf_vipsign.png",
+  0,
+  0
+ ],
+ "a": [
+  "hf_cavefloor.png",
+  0,
+  0
+ ],
+ "k": [
+  "hf_cavewall.png",
+  0,
+  0
+ ],
+ "y": [
+  "hf_crystal.png",
+  0,
+  0
+ ],
+ "p": [
+  "hf_ashgrass.png",
+  0,
+  0
+ ],
+ "b": [
+  "hf_petrifiedtree.png",
+  0,
+  0
+ ],
+ "m": [
+  "hf_marbleruin.png",
+  0,
+  0
+ ],
+ "q": [
+  "hf_marblefloor.png",
+  0,
+  0
+ ],
+ "u": [
+  "hf_vaultfloor.png",
+  0,
+  0
+ ],
+ "j": [
+  "hf_vaultwall.png",
+  0,
+  0
+ ],
+ "n": [
+  "hf_gravelamp.png",
+  0,
+  0
+ ],
+ "t": [
+  "hf_bonepile.png",
+  0,
+  0
+ ],
+ "e": [
+  "hf_vaultpool.png",
+  0,
+  0
+ ],
+ "r": [
+  "hf_ossuaryfloor.png",
+  0,
+  0
+ ],
+ "f": [
+  "hf_cinderfield.png",
+  0,
+  0
+ ],
+ "h": [
+  "hf_skyglass.png",
+  0,
+  0
+ ],
+ "i": [
+  "hf_fissure.png",
+  0,
+  0
+ ],
+ "A": [
+  "hf_hullfloor.png",
+  0,
+  0
+ ],
+ "C": [
+  "hf_hullwall.png",
+  0,
+  0
+ ],
+ "F": [
+  "hf_conduit.png",
+  0,
+  0
+ ],
+ "J": [
+  "hf_coredais.png",
+  0,
+  0
+ ],
+ "I": [
+  "hf_hulldebris.png",
+  0,
+  0
+ ],
+ "(": [
+  "hf_snowfield.png",
+  0,
+  0
+ ],
+ ")": [
+  "hf_deepsnow.png",
+  0,
+  0
+ ],
+ "&": [
+  "hf_frozentree.png",
+  0,
+  0
+ ],
+ "!": [
+  "hf_icespire.png",
+  0,
+  0
+ ],
+ "1": [
+  "hf_belfryfloor.png",
+  0,
+  0
+ ],
+ "2": [
+  "hf_belfrywall.png",
+  0,
+  0
+ ],
+ "3": [
+  "hf_frozenbell.png",
+  0,
+  0
+ ],
+ "4": [
+  "hf_icepool.png",
+  0,
+  0
+ ],
+ "5": [
+  "hf_belldais.png",
+  0,
+  0
+ ]
+}
