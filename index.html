@@ -85,41 +85,103 @@
          at HALF the viewport); the max-width is the real wrap point. */
       white-space: normal; width: max-content; max-width: min(760px, 88vw); line-height: 1.7;
     }
+    /* ---- TITLE SCREEN v2 (2026-07-19) — 16-bit start screen with key art + menu ---- */
     #start {
-      position: fixed; inset: 0; z-index: 20;
+      position: fixed; inset: 0; z-index: 20; overflow: hidden;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: rgba(6, 10, 14, 0.72);
-      cursor: pointer; user-select: none;
+      background: #05070c;
+      user-select: none;
       font-family: 'Courier New', monospace;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.5s ease;
     }
     #start.hidden { opacity: 0; pointer-events: none; }
-    #start h1 {
-      font-size: clamp(24px, 4.6vw, 46px); font-weight: 800; letter-spacing: 0.3em;
-      color: #ffd6a0; text-shadow: 3px 3px 0 rgba(0,0,0,0.8), 0 0 30px rgba(255, 130, 30, 0.4);
-      margin-bottom: 10px; text-align: center;
+    .title-bg {
+      position: absolute; inset: -4%;
+      background: url('assets/title/title_key.png') center / cover no-repeat;
+      image-rendering: pixelated;
+      animation: kenburns 26s ease-in-out infinite alternate;
     }
-    #start h1 span { color: #78ebe1; }
+    @keyframes kenburns {
+      0%   { transform: scale(1)    translateY(0); }
+      100% { transform: scale(1.07) translateY(-1.4%); }
+    }
+    .title-shade {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 82%, rgba(3,4,8,0.82) 0%, rgba(3,4,8,0.35) 45%, rgba(3,4,8,0.15) 100%),
+        linear-gradient(to bottom, rgba(3,4,8,0.25), rgba(3,4,8,0.05) 35%, rgba(3,4,8,0.72) 88%);
+    }
+    /* twinkling starfield overlay — two drifting layers of tiny dots */
+    .title-stars, .title-stars.s2 {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,0.8) 50%, transparent 51%),
+        radial-gradient(1px 1px at 34% 9%, rgba(120,235,225,0.9) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 58% 16%, rgba(255,255,255,0.65) 50%, transparent 51%),
+        radial-gradient(1px 1px at 76% 28%, rgba(255,214,160,0.8) 50%, transparent 51%),
+        radial-gradient(1px 1px at 90% 8%, rgba(255,255,255,0.7) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 22% 38%, rgba(120,235,225,0.6) 50%, transparent 51%);
+      background-size: 900px 520px;
+      animation: twinkle 3.6s ease-in-out infinite;
+      opacity: 0.7;
+    }
+    .title-stars.s2 { background-position: 340px 180px; animation-delay: 1.7s; animation-duration: 5.1s; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.85; } }
+    .title-logo {
+      position: relative; z-index: 2;
+      width: min(560px, 78vw); image-rendering: pixelated;
+      filter: drop-shadow(0 6px 0 rgba(0,0,0,0.55)) drop-shadow(0 0 34px rgba(255,140,43,0.35));
+      animation: logofloat 4.4s ease-in-out infinite;
+      margin-bottom: 8px;
+    }
+    @keyframes logofloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
     #start p.sub {
-      font-size: 12px; letter-spacing: 0.5em; color: rgba(255, 233, 207, 0.6);
-      margin-bottom: 48px;
+      position: relative; z-index: 2;
+      font-size: 11px; letter-spacing: 0.52em; color: rgba(255, 233, 207, 0.75);
+      margin: 2px 0 26px; text-shadow: 2px 2px 0 rgba(0,0,0,0.8);
     }
-    #start .enter {
-      font-size: 15px; font-weight: 800; letter-spacing: 0.34em; color: #0a0e12;
-      background: #ff8c2b; padding: 14px 40px; cursor: pointer; border: 0;
-      box-shadow: 4px 4px 0 rgba(0,0,0,0.6); font-family: 'Courier New', monospace;
-      animation: blink 1.4s steps(2) infinite;
+    /* phase 1: PRESS ENTER */
+    .title-press {
+      position: relative; z-index: 2;
+      font-size: 15px; font-weight: 800; letter-spacing: 0.4em; color: #ffe9cf;
+      background: none; border: 0; cursor: pointer; font-family: 'Courier New', monospace;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.85), 0 0 22px rgba(255,140,43,0.5);
+      animation: blink 1.3s steps(2) infinite; padding: 12px 20px;
     }
+    /* phase 2: the 16-bit menu window */
+    .tmenu {
+      position: relative; z-index: 2; min-width: min(340px, 84vw);
+      background: rgba(8, 12, 20, 0.88);
+      border: 3px solid #ffe9cf; outline: 3px solid #0a0e12;
+      box-shadow: 0 0 0 1px rgba(120,235,225,0.35), 0 14px 50px rgba(0,0,0,0.75), inset 0 0 26px rgba(53,232,220,0.06);
+      padding: 16px 18px; display: none; flex-direction: column; gap: 2px;
+    }
+    .tmenu.show { display: flex; animation: menuin 0.28s ease-out; }
+    @keyframes menuin { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .tm-item {
+      display: flex; align-items: center; gap: 12px;
+      background: none; border: 0; cursor: pointer; text-align: left;
+      font-family: 'Courier New', monospace; font-size: 15px; font-weight: 800;
+      letter-spacing: 0.22em; color: rgba(255, 233, 207, 0.62);
+      padding: 9px 10px; transition: color 0.12s;
+    }
+    .tm-item .cur { width: 16px; color: #ff8c2b; opacity: 0; }
+    .tm-item.sel { color: #ffe9cf; text-shadow: 0 0 16px rgba(255,140,43,0.55); }
+    .tm-item.sel .cur { opacity: 1; animation: blink 0.9s steps(2) infinite; }
+    .tm-item small { font-weight: 400; font-size: 10px; letter-spacing: 0.14em; color: rgba(120,235,225,0.6); margin-left: auto; }
     #start .edit {
-      margin-top: 22px; font-size: 12px; letter-spacing: 0.2em; cursor: pointer;
+      position: relative; z-index: 2;
+      margin-top: 18px; font-size: 11px; letter-spacing: 0.2em; cursor: pointer;
       color: rgba(120, 235, 225, 0.85); background: none; border: 0;
       font-family: 'Courier New', monospace; text-decoration: underline;
+      text-shadow: 1px 1px 0 rgba(0,0,0,0.8);
     }
-    #start .keys {
-      margin-top: 30px; font-size: 12px; letter-spacing: 0.2em;
-      color: rgba(120, 235, 225, 0.6);
+    .title-foot {
+      position: absolute; bottom: 18px; left: 0; right: 0; z-index: 2;
+      text-align: center; font-size: 10px; letter-spacing: 0.3em;
+      color: rgba(255, 233, 207, 0.4); text-shadow: 1px 1px 0 rgba(0,0,0,0.8);
     }
-    @keyframes blink { 50% { opacity: 0.65; } }
+    @keyframes blink { 50% { opacity: 0.55; } }
 
     /* ---- Character creator ---- */
     #creator {
@@ -566,12 +628,19 @@
       width: min(860px, 94vw); display: flex; flex-direction: column; gap: 18px;
       align-items: center;
     }
-    .cin-img {
-      width: 100%; aspect-ratio: 16 / 9; object-fit: cover; image-rendering: pixelated;
+    .cin-frame {
+      width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
       border: 3px solid #ffe9cf; box-shadow: 0 0 60px rgba(53, 232, 220, 0.12);
+    }
+    .cin-img {
+      width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated;
       opacity: 0; transition: opacity 0.9s ease;
     }
-    .cin-img.show { opacity: 1; }
+    /* each shown panel slowly breathes — alternating drift directions */
+    .cin-img.show { opacity: 1; animation: cinzoom 14s ease-in-out forwards; }
+    .cin-img.show.alt { animation-name: cinzoom2; }
+    @keyframes cinzoom  { from { transform: scale(1) translateX(0); }    to { transform: scale(1.09) translateX(-1.6%); } }
+    @keyframes cinzoom2 { from { transform: scale(1.09) translateX(1.4%); } to { transform: scale(1) translateX(0); } }
     .cin-text {
       min-height: 76px; max-width: 720px; text-align: center; font-size: 17px;
       line-height: 1.65; letter-spacing: 0.4px; text-shadow: 2px 2px 0 #000;
@@ -586,7 +655,7 @@
     }
     @keyframes cinblink { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.9; } }
   </style>
-  <script type="module" crossorigin src="./assets/index-CiqhXi4V.js"></script>
+  <script type="module" crossorigin src="./assets/index-DBVZkyvR.js"></script>
 </head>
 <body>
   <canvas id="game"></canvas>
@@ -625,13 +694,24 @@
   <div id="prompt"></div>
 
   <div id="start">
-    <h1>ILLMIND <span>UNIVERSE&nbsp;CITY</span></h1>
-    <p class="sub">MEMBERS ONLY&nbsp;&nbsp;·&nbsp;&nbsp;PRESS START</p>
-    <button class="enter" id="enter-btn">CLICK TO START</button>
-    <button class="edit" id="edit-btn">▸ create / edit your producer</button>
+    <div class="title-bg"></div>
+    <div class="title-shade"></div>
+    <div class="title-stars"></div>
+    <div class="title-stars s2"></div>
+    <img class="title-logo" src="./assets/title/logo.png" alt="UNIVERSE CITY"
+      onerror="this.style.display='none';document.getElementById('title-fallback').style.display='block'" />
+    <h1 id="title-fallback" style="display:none; position:relative; z-index:2; font-size:clamp(26px,4.8vw,48px); font-weight:800; letter-spacing:0.28em; color:#ffd6a0; text-shadow:3px 3px 0 rgba(0,0,0,0.85), 0 0 30px rgba(255,130,30,0.4); margin-bottom:10px;">UNIVERSE&nbsp;CITY</h1>
+    <p class="sub">A M!ND SOCIETY PRODUCTION</p>
+    <button class="title-press" id="press-start">▸ PRESS START ◂</button>
+    <div class="tmenu" id="tmenu">
+      <button class="tm-item" data-act="start"><span class="cur">▸</span><span id="tm-start-label">START GAME</span></button>
+      <button class="tm-item" data-act="intro"><span class="cur">▸</span>INTRO STORY</button>
+      <button class="tm-item" data-act="tutorial"><span class="cur">▸</span>HOW TO PLAY</button>
+      <button class="tm-item" data-act="char"><span class="cur">▸</span>YOUR PRODUCER</button>
+    </div>
     <button class="edit" id="login-btn" style="display:none">▸ log in</button>
     <button class="edit" id="logout-btn" style="display:none">▸ log out</button>
-    <div class="keys">WASD / ARROWS — MOVE&nbsp;&nbsp;E — INTERACT&nbsp;&nbsp;B — BACKPACK&nbsp;&nbsp;H — HELP&nbsp;&nbsp;M — SOUND&nbsp;&nbsp;C — CHARACTER</div>
+    <div class="title-foot">© 2026 THE M!ND SOCIETY&nbsp;&nbsp;·&nbsp;&nbsp;WASD MOVE&nbsp;&nbsp;·&nbsp;&nbsp;E INTERACT&nbsp;&nbsp;·&nbsp;&nbsp;H HELP</div>
   </div>
 
   <div id="creator" class="hidden"></div>
