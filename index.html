@@ -427,6 +427,18 @@
     }
     #helpbtn:hover { color: #ff8c2b; border-color: #ff8c2b; }
     #helpbtn.hidden { display: none; }
+    /* EXIT → back to mindsociety.io (2026-07-19, his ask). Two-step arm so a
+       stray click never yanks someone out of the world. */
+    #exitbtn {
+      position: fixed; bottom: 18px; right: 70px; z-index: 30;
+      height: 42px; padding: 0 14px; cursor: pointer;
+      background: #0e1420; border: 3px solid #ffe9cf; color: #ffe9cf;
+      font: 900 12px 'Courier New', monospace; letter-spacing: 0.14em;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.55);
+    }
+    #exitbtn:hover { color: #ff8c2b; border-color: #ff8c2b; }
+    #exitbtn.armed { color: #0a0e12; background: #ff8c2b; border-color: #ff8c2b; }
+    #exitbtn.hidden { display: none; }
     #help {
       position: fixed; inset: 0; z-index: 46; display: flex;
       align-items: center; justify-content: center; background: rgba(4, 6, 10, 0.6);
@@ -655,7 +667,7 @@
     }
     @keyframes cinblink { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.9; } }
   </style>
-  <script type="module" crossorigin src="./assets/index-kDvmBpNx.js"></script>
+  <script type="module" crossorigin src="./assets/index-W8cxdRnI.js"></script>
 </head>
 <body>
   <canvas id="game"></canvas>
@@ -667,6 +679,7 @@
   <div id="backpack" class="hidden"></div>
   <div id="duelpop" class="hidden"></div>
   <button id="helpbtn" class="hidden" title="Help (H)">?</button>
+  <button id="exitbtn" class="hidden" title="Back to The M!ND Society">⏏ EXIT</button>
   <div id="cinematic" class="hidden"></div>
 
   <div id="help" class="hidden">
